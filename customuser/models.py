@@ -20,9 +20,9 @@ COLOR_CHOICES = (
 
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    desc = models.CharField(max_length=200)
-    locations = models.CharField(max_length=100)
-    pin = models.IntegerField()
+    desc = models.CharField(max_length=200,default='na')
+    locations = models.CharField(max_length=100,default='kolkata')
+    pin = models.IntegerField(default=1)
     job = models.CharField(max_length=100, choices=COLOR_CHOICES, default='carpenter')
     rate = models.IntegerField(default=0)
 
