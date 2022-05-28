@@ -17,15 +17,17 @@ from django.contrib import admin
 from django.urls import path
 
 from customuser.views import CustomerSignUpView,SellerSignUpView,activate,loginUser,logout_user,profilepage,index,updateprofile
-
+from customuser import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-     path('accounts/customersignup/', CustomerSignUpView, name='customer_signup'),
-    path('accounts/sellersignup/', SellerSignUpView, name='seller_signup'),
-    path('accounts/login/',loginUser, name='login'),
-    path('accounts/logout/',logout_user, name='logout'),
+    path('customersignup/', CustomerSignUpView, name='customer_signup'),
+    path('sellersignup/', SellerSignUpView, name='seller_signup'),
+    path('login/',loginUser, name='login'),
+    path('logout/',logout_user, name='logout'),
     path('activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/',activate, name='activate'), 
     path('profile/',profilepage,name='profile'),
     path('updateprofile/',updateprofile,name='updateprofile'),
-    path('index/',index,name='index'),
+    path('index/',views.index,name='index'),
+    path('home/',views.home, name="home"),
+    path('details/<str:username>/',views.details,name="detail"),
 ]

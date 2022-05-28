@@ -24,6 +24,7 @@ class Profile(models.Model):
     locations = models.CharField(max_length=100)
     pin = models.IntegerField()
     job = models.CharField(max_length=100, choices=COLOR_CHOICES, default='carpenter')
+    rate = models.IntegerField(default=0)
 
     def __str__(self):
         return self.user.username

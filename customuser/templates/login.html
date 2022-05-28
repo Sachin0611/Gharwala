@@ -1,5 +1,8 @@
 <form method="post">
     {% csrf_token %}
     {{form}}
-    <button type="submit">signup</button>
+    <button type="submit">Login</button>
+    <h3>Not a registerd user?</h3>
+    <button><a href="{%url 'customer_signup' %}">Register as a Customer</a></button>
+    <button><a href="{%url 'seller_signup' %}">Register as a Seller</a></button>
 </form>

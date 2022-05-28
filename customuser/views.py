@@ -10,6 +10,7 @@ from django.contrib import messages
 from django.contrib.auth import login
 from django.shortcuts import redirect
 from django.views.generic import CreateView
+from django.contrib.auth.decorators import login_required
 
 from .forms import CustomerSignUpForm, LoginForm,SellerSignUpForm,UpdateProfile
 from .models import Profile, User
@@ -146,16 +147,15 @@ def loginUser(request):
 def logout_user(request):
     logout(request)
     return HttpResponse('you are logged out')
-
+@login_required
 def profilepage(request):
     return render(request,'profile.html')
 
 def index(request):
-    item_list=Profile.objects.all()
+    item_list= Profile.objects.all()
     #template = loader.get_template('food/index.html')
     context = {
-        'item_list':item_list,
-       
+        'item_list':item_list
     }
     #if we want to use line 1 we have to write it
     #return HttpResponse(template.render(context,request))
@@ -174,5 +174,17 @@ def updateprofile(request):
         return HttpResponse('profile is updated')
 
     return render(request,'profile_update_form.html',{'form':form})
+
+def home(request):
+    return render(request,'home/base.html')
+
+def details(request,username):
+    hi = User.objects.get(username = username)
+    prof = Profile.objects.filter(user=hi).first()
+    context = {
+            'prof':prof,
+        }
+    return render(request,'details.html',context)
+
 
 
