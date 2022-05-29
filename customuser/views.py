@@ -191,11 +191,16 @@ def Customer_Appoinment(request,username):
     hi = User.objects.get(username = username)
     #obj = CustomerAppointments(customer = request.user)
     obj = CustomerAppointments.objects.get(customer = request.user)
-    obj.appnts.add(hi)
+    obj.appnts.add(hi)#process to add to many to many field;
     #obj.appnts.add(hi)
     # obj.user=request.user
-    
-    #obj.save()
 
-    return redirect('customuser:index')
+    #we need to do opposite of customer to make input in case of seller
+    hi2= User.objects.get(username = request.user.username)
+    hi3=User.objects.get(username = username)
+    obj2 = CustomerAppointments.objects.get(customer = hi3)
+    obj2.appnts.add(hi2)
+    # #obj.save()
+
+    return redirect('index/')
 
