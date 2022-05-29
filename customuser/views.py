@@ -13,13 +13,13 @@ from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
 
 from .forms import CustomerSignUpForm, LoginForm,SellerSignUpForm,UpdateProfile
-from .models import Profile, User
+from .models import Profile, User,CustomerAppointments
 from django.http import HttpResponse  
 from django.shortcuts import render, redirect  
 from django.contrib.auth import login, authenticate ,logout 
  
 from django.contrib.sites.shortcuts import get_current_site  
-from django.utils.encoding import force_bytes, force_text  
+from django.utils.encoding import force_bytes,force_str  
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode  
 from django.template.loader import render_to_string  
 from .tokens import account_activation_token
@@ -110,7 +110,7 @@ def SellerSignUpView(request):
 def activate(request, uidb64, token):  
     #User = get_user_model()  
     try:  
-        uid = force_text(urlsafe_base64_decode(uidb64))  
+        uid = force_str(urlsafe_base64_decode(uidb64))  
         user = User.objects.get(pk=uid)  
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):  
         user = None  
@@ -187,4 +187,15 @@ def details(request,username):
     return render(request,'details.html',context)
 
 
+def Customer_Appoinment(request,username):
+    hi = User.objects.get(username = username)
+    #obj = CustomerAppointments(customer = request.user)
+    obj = CustomerAppointments.objects.get(customer = request.user)
+    obj.appnts.add(hi)
+    #obj.appnts.add(hi)
+    # obj.user=request.user
+    
+    #obj.save()
+
+    return redirect('customuser:index')
 

@@ -1,12 +1,19 @@
 from django.db.models.signals import post_save
 
-from .models import Profile, User
+from .models import Profile, User,CustomerAppointments
 from django.dispatch import receiver
 
-@receiver(post_save, sender=User, dispatch_uid='save_new_user_profile')
-def save_profile(sender, instance, created, **kwargs):
-    user = instance
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        profile = Profile(user=User)
-        profile.save()
+        Profile.objects.create(user=instance)
+        CustomerAppointments.objects.create(customer= instance)
+        
+
+
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
+    instance.customerappointments.save()
 

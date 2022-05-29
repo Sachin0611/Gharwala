@@ -30,4 +30,5 @@ urlpatterns = [
     path('index/',views.index,name='index'),
     path('home/',views.home, name="home"),
     path('details/<str:username>/',views.details,name="detail"),
+    #path('bookappointment/<str:username>/',views.Customer_Appoinment,name="Customer_Appoinment"),
 ]

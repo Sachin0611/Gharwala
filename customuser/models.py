@@ -28,3 +28,11 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+class CustomerAppointments(models.Model):
+    customer = models.OneToOneField(User,on_delete=models.CASCADE)
+    appnts = models.ManyToManyField(User,related_name='+')
+     
+    def __str__(self):
+        return self.customer.username
+  
