@@ -134,11 +134,11 @@ def loginUser(request):
             if user is not None and user.is_active and user.is_seller:
                 #if user.is_active and user.is_seller:
                  login(request, user)
-                 return HttpResponse('you are logged in')
+                 return redirect('/profile')
                 #message = f'Hello {user.username}! You have been logged in'
             elif user is not None and user.is_active and user.is_customer:
                 login(request,user)
-                return HttpResponse('you are logged in as a customer')
+                return redirect('/')
             else:
                 message = 'Login failed!'
     return render(
@@ -146,7 +146,7 @@ def loginUser(request):
 
 def logout_user(request):
     logout(request)
-    return HttpResponse('you are logged out')
+    return redirect('/')
 @login_required
 def profilepage(request):
     return render(request,'profile.html')
@@ -171,7 +171,7 @@ def updateprofile(request):
         obj=form.save(commit=False)
         obj.user = request.user
         obj.save()
-        return HttpResponse('profile is updated')
+        return redirect('/profile')
 
     return render(request,'profile_update_form.html',{'form':form})
 
@@ -202,5 +202,5 @@ def Customer_Appoinment(request,username):
     obj2.appnts.add(hi2)
     # #obj.save()
 
-    return redirect('index/')
+    return redirect('/')
 
