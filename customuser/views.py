@@ -163,6 +163,7 @@ def index(request):
     return render(request,'index.html',context)
 
 def updateprofile(request):
+
     item=Profile.objects.get(user = request.user)
     form = UpdateProfile(request.POST or None,instance=item)
     obj = Profile
@@ -186,6 +187,14 @@ def details(request,username):
         }
     return render(request,'details.html',context)
 
+def look(request,username):
+    hi = User.objects.get(username = username)
+    prof = Profile.objects.filter(user=hi).first()
+    context = {
+            'prof':prof,
+        }
+    return render(request,'look.html',context)
+
 
 def Customer_Appoinment(request,username):
     hi = User.objects.get(username = username)
@@ -204,3 +213,20 @@ def Customer_Appoinment(request,username):
 
     return redirect('/')
 
+def Custm_apnts(request):
+   
+   customeruser = CustomerAppointments.objects.get(customer=request.user)
+   customersellers = customeruser.appnts.all()
+   context = {
+        'customersellers':customersellers
+    }
+   return render(request,'custom_apnts.html', context)
+
+
+def Seller_apnts(request):
+    selleruser = CustomerAppointments.objects.get(customer=request.user)
+    sellercustomers = selleruser.appnts.all()
+    context = {
+        'sellercustomers':sellercustomers
+    }
+    return render(request,'seller_apnts.html',context)

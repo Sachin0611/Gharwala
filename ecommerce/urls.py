@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from customuser.views import details,CustomerSignUpView,Customer_Appoinment,SellerSignUpView,activate,loginUser,logout_user,profilepage,index,updateprofile
+from customuser.views import details,look,CustomerSignUpView,Customer_Appoinment,SellerSignUpView,activate,loginUser,logout_user,profilepage,index,updateprofile,Custm_apnts,Seller_apnts
 from customuser import views
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +31,7 @@ urlpatterns = [
     #path('home/',views.home, name="home"),
     path('details/<str:username>/',details,name="detail"),
     path('bookappointment/<str:username>/',Customer_Appoinment,name="Customer_Appoinment"),
+    path('Customer_apnts/',Custm_apnts,name="Customer_Appoinment"),
+    path('Seller_apnts/',Seller_apnts,name="Seller_Appoinment"),
+    path('view/<str:username>/',look,name="look"),
 ]

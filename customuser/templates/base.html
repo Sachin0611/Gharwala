@@ -24,10 +24,13 @@
                      <a class ="nav-item nav-link" href={%url 'logout' %}>Logout</a>
                      <a class ="nav-item nav-link" href={%url 'profile' %}>Profile</a>
                      <a class ="nav-item nav-link" href={%url 'updateprofile' %}>UpdateProfile</a>
+                     <a class ="nav-item nav-link" href={%url 'Seller_apnts' %}>Appoinments</a>
                      
                  {% elif user.is_authenticated and user.is_customer %}
                  <a class ="nav-item nav-link" href={%url 'logout' %}>Logout</a>
                  <a class ="nav-item nav-link" href={%url 'index' %}>home</a>
+                 <a class ="nav-item nav-link" href={%url 'Customer_apnts' %}>Appoinments</a>
+                
                   {% else %}  
                   <a class ="nav-item nav-link" href={%url 'login' %}>Login</a>
                  {%endif%}
@@ -35,10 +38,10 @@
         </nav>
         {%if messages%}
         {%for message in messages%}
-        <div class = "alert alert-{{message.tags}}">{{message}}</div>
-        {%endfor%}
-        {%endif%}
-        {% block body %}
+        <div class = "alert alert-{{message.tags}}">{{message}}</div>           
+        {%endfor%}                                                      
+        {%endif%}                                                        
+        {% block body %}                                                   
         {% endblock %}
         <script src="" async defer></script>
     </body>
