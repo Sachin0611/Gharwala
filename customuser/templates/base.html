@@ -24,12 +24,12 @@
                      <a class ="nav-item nav-link" href={%url 'logout' %}>Logout</a>
                      <a class ="nav-item nav-link" href={%url 'profile' %}>Profile</a>
                      <a class ="nav-item nav-link" href={%url 'updateprofile' %}>UpdateProfile</a>
-                     <a class ="nav-item nav-link" href={%url 'Seller_apnts' %}>Appoinments</a>
+                     <a class ="nav-item nav-link" href={%url 'Seller_Appoinment' %}>Appoinments</a>
                      
                  {% elif user.is_authenticated and user.is_customer %}
                  <a class ="nav-item nav-link" href={%url 'logout' %}>Logout</a>
                  <a class ="nav-item nav-link" href={%url 'index' %}>home</a>
-                 <a class ="nav-item nav-link" href={%url 'Customer_apnts' %}>Appoinments</a>
+                 <a class ="nav-item nav-link" href={%url 'Customer_Appoinment' %}>Appoinments</a>
                 
                   {% else %}  
                   <a class ="nav-item nav-link" href={%url 'login' %}>Login</a>
