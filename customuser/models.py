@@ -7,7 +7,7 @@ from django.utils import timezone
 
 
 class User(AbstractUser):
-    is_customer = models.BooleanField('customer status', default=False)
+    is_customer = models.BooleanField('customer status', default=True)
     is_seller = models.BooleanField('seller status', default=False)
 
 COLOR_CHOICES = (
